@@ -1,0 +1,16 @@
+{
+  "name": "expense-app-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve:client": "cd client-vue && npm run serve",
+    "build:client": "cd client-vue && npm run build",
+    "lint": "vue-cli-service lint",
+    "test:e2e": "cd client-vue && npm run test:e2e",
+    "test:unit": "cd client-vue && npm run test:unit",
+    "build:server": "cd server-mvc && dotnet build",
+    "serve:server": "cd server-mvc/server-mvc && dotnet run",
+    "build:both": "npm run build:client && npm run build:server",
+    "serve:both": "npm run build:client && npm run build:server && npm run serve:server"
+  }
+}

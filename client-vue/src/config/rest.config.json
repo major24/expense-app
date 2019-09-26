@@ -1,0 +1,22 @@
+{
+  "api": {
+    "postAuthenticateUser": {
+      "url": "/api/authentication"
+    },
+    "getUserById": {
+      "url": "/api/users/{userId}"
+    },
+    "getUserTransactions": {
+      "url": "/api/users/{userId}/transactions"
+    },
+    "postExpenses": {
+      "url": "/api/expenses"
+    },
+    "getTransactions": {
+      "url": "/api/transactions"
+    },
+    "getGithubusers": {
+      "url": "https://api.github.com/users"
+    }
+  }
+}
