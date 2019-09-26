@@ -1,10 +1,11 @@
 
-# AspCoreMvc-VueJS-Template
-Asp MVC acts as server for VueJS client side script. Contains sample REST get api call
+# AspDotNetCoreMvc-VueJS-Expense Submission App 
+Asp MVC acts as server for VueJS client. Client is build with Vuejs, vuex and bootstrap template  
+Once the client is built, it saves to wwwroot of the 'server-mvc' app, which server the client
 
 ## How to run
 
-## First run the REST api in the background
+## First run the REST api in the background (creditcard-transactions) 
   Build and publish
   Copy the published folder/files + settingup doc into a directory.
   Run api: run using 'dotnet ./transactions.dll' in the command line
