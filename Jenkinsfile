@@ -13,10 +13,14 @@ node {
 		}
 	}
 	stage('Build project') {
-		bat "dotnet build"
+		dir ("server-mvc") {
+			bat "dotnet build"
+		}
 	}
 	stage('Run xUnit test') {
-		bat "dotnet test"
+		dir ("server-mvc") {
+			bat "dotnet test"
+		}
 	}
 	stage('Publish project') {
 		dir("server-mvc") {
