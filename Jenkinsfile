@@ -3,7 +3,7 @@ node {
 		git branch: 'master', url: 'https://github.com/major24/expense-app.git'
 	}
 	stage('Restore Packages') {
-  		bat "dotnet restore"
+  		bat "cd server-mvc dotnet restore"
 	}
 	stage('Clean project') {
 		bat "dotnet clean"
