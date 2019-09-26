@@ -1,14 +1,15 @@
 
 # AspDotNetCoreMvc-VueJS-Expense Submission App 
-Asp MVC acts as server for VueJS client. Client is build with Vuejs, vuex and bootstrap template  
-Once the client is built, it saves to wwwroot of the 'server-mvc' app, which server the client
+AspCore MVC server app acts as server for VueJS client. Client is built with Vuejs, vuex and bootstrap template.  
+Once the client is built (npm run build), it saves assests (js files) to wwwroot of the 'server-mvc' app.  
+When running server app, the app renders the VueJS app.  
 
 ## How to run
 
-## First run the REST api in the background (creditcard-transactions) 
-  Build and publish
-  Copy the published folder/files + settingup doc into a directory.
-  Run api: run using 'dotnet ./transactions.dll' in the command line
+## First run the REST api in the background  
+  (creditcard-transactions app - This requires SQL server setup. Data is fetched from db) 
+  Build and publish 
+  Run api: run using 'dotnet ./transactions.dll' in the command line (from published folder)
   Should be able to access https://localhost:5001/api/...
   
 ## Open Vue JS client and build
