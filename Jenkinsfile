@@ -19,7 +19,7 @@ node {
 		bat "dotnet test"
 	}
 	stage('Publish project') {
-		dir("creditcard-transactions") {
+		dir("server-mvc") {
 			bat "dotnet publish -c Production -o C:\\temp\\server-mvc-deployed"
 		}
 	}
