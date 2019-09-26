@@ -13,14 +13,15 @@ When running server app, the app renders the VueJS app.
   Should be able to access https://localhost:5001/api/...
   
 ## Open Vue JS client and build
-  $ npm run build
-  This should build and deploy under server-mvc/wwwroot/dist folder
+  $ npm run build  
+  This should build and deploy under server-mvc/wwwroot/dist folder  
+ 
+## In Visual Studio, Open server-mvc project and run  
+  Debug or dotnet run  
+  This should run the web app. Home page should render what the vue page contains...  
+  Vue page has two buttons to get REST api data. upon clicking should return api data  
 
-## In Visual Studio, Open server-mvc project and run
-  Debug or dotnet run 
-  This should run the web app. Home page should render what the vue page contains...
-  Vue page has two buttons to get REST api data. upon clicking should return api data
-=======
-# expense-app
-AspCoreMVC server and VUEJS client app to submit credit card and OOP expenses
+
+## expense-app  
+   AspCoreMVC server and VUEJS client app to submit credit card and OOP expenses  
 
