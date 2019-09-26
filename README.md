@@ -1,3 +1,4 @@
+
 # AspCoreMvc-VueJS-Template
 Asp MVC acts as server for VueJS client side script. Contains sample REST get api call
 
@@ -17,3 +18,7 @@ Asp MVC acts as server for VueJS client side script. Contains sample REST get ap
   Debug or dotnet run 
   This should run the web app. Home page should render what the vue page contains...
   Vue page has two buttons to get REST api data. upon clicking should return api data
+=======
+# expense-app
+AspCoreMVC server and VUEJS client app to submit credit card and OOP expenses
+
