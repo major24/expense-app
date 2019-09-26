@@ -24,7 +24,7 @@ node {
 	}
 	stage('Publish project') {
 		dir("server-mvc") {
-			bat "dotnet publish -c Release -o "c:\temp\server-mvc-deployed"
+			bat "dotnet publish -c Release -o "c:\\temp\\server-mvc-deployed"
 		}
 	}
 }
