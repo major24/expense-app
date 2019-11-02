@@ -25,7 +25,9 @@ namespace server_mvc.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> Post([FromBody] Expense expense)
         {
-            string url = _config.GetSection("api").GetSection("postExpenses").Value;
+            // string url = _config.GetSection("api").GetSection("postExpenses").Value;
+            string resourceUri = _config.GetSection("api").GetSection("postExpenses").Value;
+            string url = $"{ _config.GetSection("api").GetSection("baseUrl").Value}{resourceUri}";
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Post, url))
             using (var httpContent = new UtilHttpContent().CreateHttpContent(expense))

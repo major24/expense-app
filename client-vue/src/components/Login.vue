@@ -48,8 +48,10 @@ export default {
       if (isAuthenticated) {
         this.$store.commit('commonDetails/setAuthenticationSuccess');
         const user = await loginService.getUser(this.userId);
+        console.log('>>>before safe to session', user);
         // Save to session storage
         loginService.setUserInSessionStorage(user);
+
         router.push({ name: 'expense' });
       } else {
         this.authenticationError = 'Authentication failed!';

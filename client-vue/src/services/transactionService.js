@@ -9,7 +9,9 @@ export default {
   },
   getTransactionsByUserId: async (userId) => {
     let url = config.api.getUserTransactions.url;
+    console.log('>>>tr');
     url = url.replace('{userId}', userId)
+    console.log('>>>trurl', url);
     const resp = await ajax.get(url);
     return resp.data;
   },

@@ -25,18 +25,27 @@ namespace server_mvc.Controllers
         [HttpGet("{userid}", Name = "GetByUserId")]
         public async Task<ActionResult<User>> GetByuserId(string userid)
         {
-            string url = string.Format(_config.GetSection("api").GetSection("getUserById").Value, userid);
-
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            try
             {
-                User body = await response.Content.ReadAsAsync<User>();
-                return body;
-            } else
+                string resourseUri = string.Format(_config.GetSection("api").GetSection("getUserById").Value, userid);
+                string url = $"{ _config.GetSection("api").GetSection("baseUrl").Value}{resourseUri}";
+
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    User body = await response.Content.ReadAsAsync<User>();
+                    return body;
+                }
+                else
+                {
+                    return StatusCode((int)response.StatusCode, "Error fetching user");
+                }
+            }
+            catch (Exception ex)
             {
-                return StatusCode((int)response.StatusCode, "Error fetching user");
+                throw new Exception("Error fetching user " + ex.Message);
             }
         }
 
