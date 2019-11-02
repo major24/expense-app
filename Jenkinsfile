@@ -3,20 +3,28 @@ node {
 		git branch: 'master', url: 'https://github.com/major24/expense-app.git'
 	}
 	stage('Restore Packages') {
-  		bat "dotnet restore"
+		dir ("server-mvc") {
+			bat "dotnet restore"
+		}
 	}
 	stage('Clean project') {
-		bat "dotnet clean"
+		dir ("server-mvc") {
+			bat "dotnet clean"
+		}
 	}
 	stage('Build project') {
-		bat "dotnet build"
+		dir ("server-mvc") {
+			bat "dotnet build"
+		}
 	}
 	stage('Run xUnit test') {
-		bat "dotnet test"
+		dir ("server-mvc") {
+			bat "dotnet test"
+		}
 	}
 	stage('Publish project') {
-		dir("creditcard-transactions") {
-			bat "dotnet publish -c Production -o C:\\temp\\server-mvc-deployed"
+		dir("server-mvc") {
+			bat "dotnet publish -c Release -o c:\\temp\\server-mvc-deployed"
 		}
 	}
 }
