@@ -2,9 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <button v-if="!userDetails.isAuthenticated" type="button" @click="login" class="btn btn-link">Login</button>
-      <button v-if="userDetails.isAuthenticated" type="button" @click="logout" class="btn btn-link">Logout</button>
-      <hr />
+      <router-link to="/expense" class="btn btn-link">Expense Form</router-link>
+      <button v-if="!userDetails.user.isAuthenticated" type="button" @click="login" class="btn btn-link">Login</button>
+      <button v-if="userDetails.user.isAuthenticated" type="button" @click="logout" class="btn btn-link">Logout</button>
     </div>
     <router-view/>
   </div>
@@ -16,29 +16,29 @@ import router from './router'
 
 export default {
   name: 'App',
-  mounted: function() {
-    let user = sessionStorage.getItem("user");
+  mounted: function () {
+    let user = sessionStorage.getItem('user')
     if (user) {
-      this.$store.commit('commonDetails/setAuthenticationSuccess');
+      this.$store.commit('commonDetails/setAuthenticationSuccess')
     } else {
-      this.$store.commit('commonDetails/setAuthenticationFail');
+      this.$store.commit('commonDetails/setAuthenticationFail')
     }
   },
   computed: {
     ...mapState({
-      userDetails: state => state.commonDetails.user,
-      expenseDetails: state => state.expenseDetails,
+      userDetails: state => state.commonDetails,
+      expenseDetails: state => state.expenseDetails
     })
   },
   methods: {
-    login() {
-      router.push({ name: 'login' });
+    login () {
+      router.push({ name: 'login' })
     },
-    logout() {
-      sessionStorage.clear();
-      this.$store.commit('commonDetails/logout');
+    logout () {
+      sessionStorage.clear()
+      this.$store.commit('commonDetails/logout')
       this.$store.commit('expenseDetails/resetTransactions')
-      router.push({ name: 'home' });
+      router.push({ name: 'home' })
     }
   }
 }

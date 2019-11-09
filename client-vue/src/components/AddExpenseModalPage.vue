@@ -1,7 +1,14 @@
 <template>
   <div class="content">
     <!-- Modal -->
-    <div class="modal fade" id="addExpenseModal" tabindex="-1" role="dialog" aria-labelledby="addExpenseModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="addExpenseModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addExpenseModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -17,26 +24,50 @@
                   <div class="col-md-6">Date</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6"><input type="date" class="form-control" @change="onchangeDate" :value="date" placeholder="YYYYMMDD"/></div>
+                  <div class="col-md-6">
+                    <input
+                      type="date"
+                      class="form-control"
+                      @change="onchangeDate"
+                      :value="date"
+                      placeholder="YYYYMMDD"
+                    />
+                  </div>
                 </div>
 
                 <div id="row-header" class="row">
                   <div class="col-md-6">Description</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6"><input type="text" class="form-control" @change="onchangeDescription" :value="description"/></div>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      @change="onchangeDescription"
+                      :value="description"
+                    />
+                  </div>
                 </div>
                 <div id="row-header" class="row">
                   <div class="col-md-6">Amount</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6"><input type="text" class="form-control" @change="onchangeAmount" :value="amount"/></div>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      @change="onchangeAmount"
+                      :value="amount"
+                    />
+                  </div>
                 </div>
                 <div id="row-header" class="row">
                   <div class="col-md-6">Tax</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6"><input type="text" class="form-control" @change="onchangeTax" :value="tax"/></div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" @change="onchangeTax" :value="tax" />
+                  </div>
                 </div>
                 <div id="row-header" class="row">
                   <div class="col-md-6">Expense Type</div>
@@ -45,9 +76,11 @@
                   <div class="col-md-6">
                     <select class="form-control" @change="onchangeCategory">
                       <option value="select" selected>Select</option>
-                      <option value="trvl">Travel</option>
-                      <option value="food">Food and Bev</option>
-                      <option value="Other">Other</option>
+                      <option
+                        v-for="category in categoryLookup"
+                        :key="category.key"
+                        :value="category.key"
+                      >{{category.value}}</option>
                     </select>
                   </div>
                 </div>
@@ -55,7 +88,9 @@
                   <div class="col-md-6">Notes</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6"><textarea class="form-control" @change="onchangeNotes" :value="notes"/></div>
+                  <div class="col-md-6">
+                    <textarea class="form-control" @change="onchangeNotes" :value="notes" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,8 +106,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'addExpenseModalPage',
   data: function () {
@@ -82,7 +115,17 @@ export default {
       amount: '',
       tax: '',
       category: '',
-      notes: ''
+      notes: '',
+      categoryLookup: [
+        { key: 'TRVL', value: 'Travel' },
+        { key: 'FOOD', value: 'Food and Bev' },
+        { key: 'SUPL', value: 'Office Supplies' },
+        { key: 'TAXI', value: 'Taxi and Transportation' },
+        { key: 'ACCM', value: 'Hotel Accomodation' },
+        { key: 'ENT1', value: 'Entertainment' },
+        { key: 'PROM', value: 'Business Promotions' },
+        { key: 'OTHR', value: 'Other' }
+      ]
     }
   },
   methods: {
@@ -105,7 +148,14 @@ export default {
       this.notes = e.target.value
     },
     saveExpense () {
-      const payload = { 'transType': 'OP', 'description': this.description, 'amount': this.amount, 'tax': this.tax, 'category': this.category, 'transDate': this.date }
+      const payload = {
+        transType: 'OP',
+        description: this.description,
+        amount: this.amount,
+        tax: this.tax,
+        category: this.category,
+        transDate: this.date
+      }
       this.$store.commit('expenseDetails/addTransaction', payload)
       this.clearInputData()
     },
@@ -119,7 +169,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
@@ -127,5 +176,4 @@ export default {
   margin-right: 8em;
   margin-left: 8em;
 }
-
 </style>

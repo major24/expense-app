@@ -1,26 +1,16 @@
 <template>
   <div class="main-content">
-    <!-- <p>{{expenseDetails}}</p> -->
-    <div v-if="expenseDetails.expense.isShowExpenses" id="expense-content">
-      <hr />
-        <div>
-          <span class="field-label">User Id:</span>
-          <span class="field-value">{{expenseDetails.user.userId}}</span>
-        </div>
-      <hr />
+    <div v-if="!loggedIn">
+      <b>Please login before accessing the form!</b>
+    </div>
+    <div v-if="loggedIn && expenseDetails.expense.isShowExpenses" id="expense-content">
+      <UserInfo />
       <ExpenseGridView />
       <AddExpenseModalPage />
+      <ApproverInfo />
 
       <div id="action-buttons-footer" class="container-fluid">
         <div class="row">
-          <div class="col-md-4 text-left">
-            <span>Approvar Id</span>
-            <input type="text" id="approverId" @change="onchangeApproverId" :value="expenseDetails.user.approverId" />
-          </div>
-          <div class="col-md-4 text-left">
-            Cost Centre
-            <input type="text" id="costCentre" @change="onchangeCostCentre" :value="expenseDetails.user.costCentre" />
-          </div>
           <div class="col-md-12 text-right">
             <span class="action-buttons">
               <button id="add-expense" type="button" class="btn btn-secondary">Cancel</button>
@@ -31,13 +21,10 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div v-if="!expenseDetails.expense.isShowExpenses">
-      <div>
-        Message: {{expenseDetails.expense.submissionMessage}}
-      </div>
+      <div>Message: {{expenseDetails.expense.submissionMessage}}</div>
     </div>
   </div>
 </template>
@@ -45,26 +32,38 @@
 <script>
 import ExpenseGridView from './ExpenseGridView'
 import AddExpenseModalPage from '@/components/AddExpenseModalPage'
+import UserInfo from '@/components/UserInfo'
+import ApproverInfo from '@/components/ApproverInfo'
 import { mapState } from 'vuex'
-import router from '../router'
 
 export default {
   name: 'expense',
   components: {
     ExpenseGridView,
-    AddExpenseModalPage
+    AddExpenseModalPage,
+    UserInfo,
+    ApproverInfo
   },
-  created: function() {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    console.log('>>> From Session ', user);
-    if (user) {
-      this.loadData(user.userId);
-      this.setUserData(user);
+  data: function () {
+    return {
+      loggedIn: false
+    }
+  },
+  created: function () {
+    let userId = sessionStorage.getItem('userId')
+    console.log('>>>From Session: logged in user:', userId)
+    // user =  { userId: "user1" }; // TMP to work when api is not available
+    if (userId && this.userDetails.userData) {
+      this.loadData(userId)
+      this.setUserData(this.userDetails.userData)
+      this.loggedIn = true
+    } else {
+      this.loggedIn = false
     }
   },
   computed: {
     ...mapState({
-      userDetails: state => state.commonDetails.user,
+      userDetails: state => state.commonDetails,
       expenseDetails: state => state.expenseDetails,
       transactions: state => state.expenseDetails.transactions
     })
@@ -76,14 +75,8 @@ export default {
     setUserData (user) {
       this.$store.dispatch('expenseDetails/setUserData', user)
     },
-    save() {
-      this.$store.dispatch('expenseDetails/save');
-    },
-    onchangeCostCentre(e) {
-      this.$store.commit('expenseDetails/setCostCentre', e.target.value)
-    },
-    onchangeApproverId(e) {
-      this.$store.commit('expenseDetails/setApproverId', e.target.value)
+    save () {
+      this.$store.dispatch('expenseDetails/save')
     }
   }
 }
@@ -98,23 +91,23 @@ export default {
   background-color: #34b1eb;
 }
 #grid > .row > div {
-  border-bottom: .5px solid grey;
+  border-bottom: 0.5px solid grey;
 }
 #action-buttons-footer {
   margin-top: 3em;
 }
 .action-buttons {
-  margin: .4em;
+  margin: 0.4em;
 }
 .field-label {
   font-weight: bold;
   font-size: 1em;
-  margin: .5em;
+  margin: 0.5em;
 }
 .field-value {
   color: blue;
   font-weight: bold;
   font-size: 1em;
-  margin: .2em;
+  margin: 0.2em;
 }
 </style>

@@ -3,7 +3,7 @@
     <div id="grid" class="container-fluid">
       <div class="row">
         <div class="col-md-12 text-right">
-          <button id="add-expense" type="button" data-toggle="modal" data-target="#addExpenseModal" class="btn btn-primary btn-sm">+</button>
+          <button id="add-expense" type="button" data-toggle="modal" data-target="#addExpenseModal" class="btn btn-primary btn-sm">Add Expense</button>
         </div>
       </div>
       <div id="row-header" class="row">
@@ -41,17 +41,17 @@ export default {
     })
   },
   methods: {
-    onchangeIsPersonal(e, id) {
-      const payload = { id: id, status: e.target.checked };
-      this.$store.commit('expenseDetails/setIsPersonal', payload);
+    onchangeIsPersonal (e, id) {
+      const payload = { id: id, status: e.target.checked }
+      this.$store.commit('expenseDetails/setIsPersonal', payload)
     },
-    onchangeIsRemove(e, id) {
-      const payload = { id: id, status: e.target.checked };
-      this.$store.commit('expenseDetails/setIsRemove', payload);
+    onchangeIsRemove (e, id) {
+      const payload = { id: id, status: e.target.checked }
+      this.$store.commit('expenseDetails/setIsRemove', payload)
     },
-    remove(e, id) {
-      const payload = { id: id, status: e.target.checked };
-      this.$store.commit('expenseDetails/setIsRemove', payload);
+    remove (e, id) {
+      const payload = { id: id, status: e.target.checked }
+      this.$store.commit('expenseDetails/setIsRemove', payload)
     }
   }
 }

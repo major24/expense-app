@@ -5,34 +5,33 @@ export default {
   authenticateUser: async function (userId, password) {
     try {
       const url = config.api.postAuthenticateUser.url
-      console.log('>>>>URL: ', url)
+      console.log('>>>Authentication url: ', url)
       const data = { 'UserId': userId, 'Password': password }
       const resp = await ajax.post(url, data)
-      console.log('user authentication passed. ', resp)
+      console.log('>>>User authentication passed. ', resp)
       if (resp.status === 200) {
         return true
       }
+      return false
     } catch (error) {
       console.log(error.message)
       return false
     }
   },
-
   getUser: async function (userId) {
     let url = config.api.getUserById.url
     url = url.replace('{userId}', userId)
     const resp = await ajax.get(url)
     return resp.data
   },
-
   setUserInSessionStorage (user) {
     this.saveToSessionStorage(user)
   },
-  saveToSessionStorage (user) {
+  saveToSessionStorage (userId) {
     if (typeof (Storage) !== 'undefined') {
-      sessionStorage.setItem('user', JSON.stringify(user))
+      sessionStorage.setItem('userId', userId)
     } else {
-      console.log('Error: your browser does not support Web Storage...')
+      console.log('>>>Error: your browser does not support Web Storage...')
     }
   }
 }
