@@ -50,9 +50,8 @@ export default {
     let userId = sessionStorage.getItem('userId')
     console.log('>>>From Session: logged in user:', userId)
     // user =  { userId: "user1" }; // TMP to work when api is not available
-    if (userId && this.userDetails.userData) {
+    if (userId && this.expenseDetails.user) {
       this.loadData(userId)
-      this.setUserData(this.userDetails.userData)
       this.loggedIn = true
     } else {
       this.loggedIn = false
@@ -60,19 +59,37 @@ export default {
   },
   computed: {
     ...mapState({
-      userDetails: state => state.commonDetails,
       expenseDetails: state => state.expenseDetails,
-      transactions: state => state.expenseDetails.transactions
+      transactions: state => state.expenseDetails.transactions,
+      errorDetails: state => state.expenseDetails.errors
     })
   },
   methods: {
     loadData (userId) {
       this.$store.dispatch('expenseDetails/loadData', userId)
     },
-    setUserData (user) {
-      this.$store.dispatch('expenseDetails/setUserData', user)
-    },
     save () {
+      let foundError = false
+      if (!this.expenseDetails.user.userId) {
+        alert ('User Id missing. Please refresh and login again')
+      }
+      if (!this.expenseDetails.user.approverId) {
+        const payload = {
+          errorId: 'approverId',
+          errorDesc: 'Approver id is required'
+        }
+        this.$store.commit('expenseDetails/setError', payload)
+        foundError = true
+      }
+      if (!this.expenseDetails.user.costCentre) {
+        const payload = {
+          errorId: 'costCentre',
+          errorDesc: 'Cost centre is required'
+        }
+        this.$store.commit('expenseDetails/setError', payload)
+        foundError = true
+      }
+      if (foundError) return false
       this.$store.dispatch('expenseDetails/save')
     }
   }

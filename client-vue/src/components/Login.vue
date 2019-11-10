@@ -47,7 +47,8 @@ export default {
   },
   computed: {
     ...mapState({
-      userDetails: state => state.commonDetails
+      commonDetails: state => state.commonDetails,
+      userDetails: state => state.expenseDetails
     })
   },
   methods: {
@@ -70,7 +71,8 @@ export default {
         // Save to session storage
         loginService.setUserInSessionStorage(user.userId)
         this.$store.commit('commonDetails/setAuthenticationSuccess')
-        this.$store.commit('commonDetails/setUser', user)
+        this.$store.commit('expenseDetails/setUser', user)
+        this.$store.commit('expenseDetails/setApproverId', user.managerId)
         router.push({ name: 'expense' })
       } else {
         this.authenticationError = 'Authentication failed!'

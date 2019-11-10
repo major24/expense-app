@@ -2,12 +2,9 @@
 export default {
   namespaced: true,
   state: {
-    userData: {},
     user: {
       isAuthenticated: false
     }
-  },
-  actions: {
   },
   mutations: {
     setAuthenticationSuccess (state) {
@@ -18,9 +15,6 @@ export default {
     },
     logout (state) {
       state.user.isAuthenticated = false
-    },
-    setUser (state, user) {
-      state.userData = user
     }
   }
 }

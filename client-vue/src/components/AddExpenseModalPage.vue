@@ -46,6 +46,7 @@
                       @change="onchangeDescription"
                       :value="description"
                     />
+                    <div class="text-danger" v-if="errors.description">{{errors.description}}</div>
                   </div>
                 </div>
                 <div id="row-header" class="row">
@@ -54,11 +55,12 @@
                 <div id="row-header" class="row">
                   <div class="col-md-6 mb-2">
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       @change="onchangeAmount"
                       :value="amount"
                     />
+                    <div class="text-danger" v-if="errors.amount">{{errors.amount}}</div>
                   </div>
                 </div>
                 <div id="row-header" class="row">
@@ -66,7 +68,7 @@
                 </div>
                 <div id="row-header" class="row">
                   <div class="col-md-6 mb-2">
-                    <input type="text" class="form-control" @change="onchangeTax" :value="tax" />
+                    <input type="number" class="form-control" @change="onchangeTax" :value="tax" />
                   </div>
                 </div>
                 <div id="row-header" class="row">
@@ -75,13 +77,14 @@
                 <div id="row-header" class="row">
                   <div class="col-md-6 mb-2">
                     <select class="form-control" @change="onchangeCategory">
-                      <option value="select" selected>Select</option>
+                      <option value="" selected>Select</option>
                       <option
                         v-for="category in categoryLookup"
                         :key="category.key"
                         :value="category.key"
                       >{{category.value}}</option>
                     </select>
+                    <div class="text-danger" v-if="errors.category">{{errors.category}}</div>
                   </div>
                 </div>
                 <div id="row-header" class="row">
@@ -96,7 +99,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" ref="button-close" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" @click="saveExpense" class="btn btn-primary">Save</button>
           </div>
         </div>
@@ -125,7 +128,13 @@ export default {
         { key: 'ENT1', value: 'Entertainment' },
         { key: 'PROM', value: 'Business Promotions' },
         { key: 'OTHR', value: 'Other' }
-      ]
+      ],
+      errors: {
+        date: '',
+        description: '',
+        amount: '',
+        expenseType: ''
+      }
     }
   },
   methods: {
@@ -133,21 +142,25 @@ export default {
       this.date = e.target.value
     },
     onchangeDescription (e) {
+      this.errors.description = ''
       this.description = e.target.value
     },
     onchangeAmount (e) {
+      this.errors.amount = ''
       this.amount = e.target.value
     },
     onchangeTax (e) {
       this.tax = e.target.value
     },
     onchangeCategory (e) {
+      this.errors.category = ''
       this.category = e.target.value
     },
     onchangeNotes (e) {
       this.notes = e.target.value
     },
-    saveExpense () {
+    saveExpense (event) {
+      if (!this.isValidForm()) return false
       const payload = {
         transType: 'OP',
         description: this.description,
@@ -158,6 +171,7 @@ export default {
       }
       this.$store.commit('expenseDetails/addTransaction', payload)
       this.clearInputData()
+      this.$refs['button-close'].click()
     },
     clearInputData () {
       this.date = ''
@@ -166,6 +180,26 @@ export default {
       this.tax = ''
       this.category = ''
       this.notes = ''
+    },
+    isValidForm () {
+      let errors = {}
+      if (!this.description) {
+        errors.description = 'Description is required'
+      }
+      if (!this.amount) {
+        errors.amount = 'Amount is required'
+      }
+      if (!this.category) {
+        errors.category = 'Expense type is required'
+      }
+      // merge local error with comp state errors property
+      this.errors = { ...this.errors, ...errors }
+      // if any errors, send back false
+      if (Object.keys(errors).length === 0) {
+        return true
+      }
+
+      return false
     }
   }
 }

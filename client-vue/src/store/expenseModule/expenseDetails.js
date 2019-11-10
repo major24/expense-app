@@ -6,14 +6,15 @@ export default {
   namespaced: true,
   state: {
     transactions: [],
-    user: {
-      userId: '',
-      approverId: '',
-      costCentre: ''
-    },
+    user: {},
     expense: {
       isShowExpenses: true,
       submissionMessage: ''
+    },
+    errors: {
+      userId: '',
+      approverId: '',
+      costCentre: ''
     }
   },
   actions: {
@@ -27,11 +28,6 @@ export default {
           console.log('Error in fetching transaction data:')
         }
       }
-    },
-    setUserData ({ commit, state }, user) {
-      commit('setUserid', user.userId)
-      commit('setCostCentre', user.costCentre)
-      commit('setApproverId', user.managerId)
     },
     async save ({ commit, state }) {
       const resp = await transactionService.save(state.transactions, state.user)
@@ -104,6 +100,15 @@ export default {
     },
     setSubmissionMessage (state, msg) {
       state.expense.submissionMessage = msg
+    },
+    setError (state, payload) {
+      state.errors[payload.errorId] = payload.errorDesc
+    },
+    resetError (state, fieldId) {
+      state.errors[fieldId] = ''
+    },
+    setUser (state, user) {
+      state.user = user
     }
   }
 }

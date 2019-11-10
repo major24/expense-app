@@ -24,7 +24,7 @@ export default {
   name: 'userinfo',
   computed: {
     ...mapState({
-      userDetails: state => state.commonDetails.userData
+      userDetails: state => state.expenseDetails.user
     })
   }
 }

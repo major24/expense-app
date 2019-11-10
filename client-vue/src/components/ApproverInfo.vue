@@ -9,8 +9,9 @@
               class="form-control"
               id="approverId"
               @change="onchangeApproverId"
-              :value="userDetails.managerId"
+              :value="userDetails.approverId"
             />
+            <div class="text-danger" v-if="errorDetails.approverId">{{errorDetails.approverId}}</div>
         </div>
       </div>
       <div class="row">
@@ -23,6 +24,7 @@
               @change="onchangeCostCentre"
               :value="userDetails.costCentre"
             />
+            <div class="text-danger" v-if="errorDetails.costCentre">{{errorDetails.costCentre}}</div>
         </div>
       </div>
     </div>
@@ -36,15 +38,20 @@ export default {
   name: 'approverInfo',
   computed: {
     ...mapState({
-      userDetails: state => state.commonDetails.userData
+      userDetails: state => state.expenseDetails.user,
+      errorDetails: state => state.expenseDetails.errors
     })
   },
   methods: {
-    onchangeCostCentre (e) {
-      this.$store.commit('exenseDetails/setCostCentre', e.target.value)
-    },
     onchangeApproverId (e) {
-      this.$store.commit('expenseDetails/setApproverId', e.target.value)
+      const value = e.target.value
+      this.$store.commit('expenseDetails/setApproverId', value)
+      this.$store.commit('expenseDetails/resetError', 'approverId')
+    },
+    onchangeCostCentre (e) {
+      const value = e.target.value
+      this.$store.commit('expenseDetails/setCostCentre', value)
+      this.$store.commit('expenseDetails/resetError', 'costCentre')
     }
   }
 }
