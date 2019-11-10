@@ -1,6 +1,6 @@
 import Transaction from '../../models/transaction'
 import transactionService from '../../services/transactionService'
-// import transactionService from '../../services/mocks/mockTransactionService'
+import moment from 'moment'
 
 export default {
   namespaced: true,
@@ -20,16 +20,11 @@ export default {
     async loadData ({ commit, state }, userId) {
       if (state.transactions.length === 0) {
         const data = await transactionService.getTransactionsByUserId(userId)
-        // console.log('Data sussessfully fetched111: ', data.response)
-        // console.log('Data sussessfully fetched222: ', data.response.data)
-        console.log('Data sussessfully fetched333: ', data)
         if (data && data.status === 200) {
           console.log('Data sussessfully fetched: ', data)
           commit('setTransactionData', data.data)
         } else {
           console.log('Error in fetching transaction data:')
-          // commit('setHideExpenses')
-          // commit('setSubmissionMessage', 'Error in fetching transaction data')
         }
       }
     },
@@ -39,9 +34,7 @@ export default {
       commit('setApproverId', user.managerId)
     },
     async save ({ commit, state }) {
-      console.log('>>>saving', state.transactions)
       const resp = await transactionService.save(state.transactions, state.user)
-      console.log('>>>>>>', resp)
       if (resp.status === 201 || resp.status === 200) {
         commit('setHideExpenses')
         commit('setSubmissionMessage', resp.data)
@@ -58,7 +51,7 @@ export default {
         tran.description = tranItem.description
         tran.amount = tranItem.amount
         tran.tax = tranItem.tax
-        tran.transDate = tranItem.transDate
+        tran.transDate = moment(tranItem.transDate).format('YYYY-MM-DD')
         tran.category = tranItem.category
         tran.isPersonal = false
         tran.isRemove = false

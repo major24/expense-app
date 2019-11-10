@@ -1,14 +1,18 @@
 <template>
   <div class="main-content">
-    <div>
-      <span class="field-label">User:</span>
-      <span
-        class="field-label-value"
-      >{{userDetails.userId}} - {{userDetails.firstName}} {{userDetails.lastName}}</span>
-    </div>
-    <div>
-      <span class="field-label">MgrId / CC:</span>
-      <span class="field-label-value">{{userDetails.managerId}} / {{userDetails.costCentre}}</span>
+    <div id="grid" class="container-fluid">
+      <div class="row">
+        <div class="col-sm-1 text-primary font-weight-bold">User:</div>
+        <div class="col-md-6 text-info font-weight-bold">{{userDetails.userId}} - {{userDetails.firstName}} {{userDetails.lastName}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1 text-primary font-weight-bold">MgrID:</div>
+        <div class="col-md-6 text-info font-weight-bold">{{userDetails.managerId}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1 text-primary font-weight-bold">CC:</div>
+        <div class="col-md-6 text-info font-weight-bold">{{userDetails.costCentre}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,19 +31,4 @@ export default {
 </script>
 
 <style scoped>
-.main-content {
-  margin-right: 6em;
-  margin-left: 6em;
-}
-.field-label {
-  font-weight: bold;
-  font-size: 1em;
-  margin: 0.5em;
-}
-.field-label-value {
-  font-weight: bold;
-  color: blue;
-  font-size: 1em;
-  margin: 0.5em;
-}
 </style>

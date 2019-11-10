@@ -21,10 +21,10 @@
             <div class="container-fluid">
               <div class="form-group">
                 <div id="row-header" class="row">
-                  <div class="col-md-6">Date</div>
+                  <div class="col-md-6 text-primary font-weight-bold">Date</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 mb-2">
                     <input
                       type="date"
                       class="form-control"
@@ -36,10 +36,10 @@
                 </div>
 
                 <div id="row-header" class="row">
-                  <div class="col-md-6">Description</div>
+                  <div class="col-md-6 text-primary font-weight-bold">Description</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 mb-2">
                     <input
                       type="text"
                       class="form-control"
@@ -49,10 +49,10 @@
                   </div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">Amount</div>
+                  <div class="col-md-6 text-primary font-weight-bold">Amount</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 mb-2">
                     <input
                       type="text"
                       class="form-control"
@@ -62,18 +62,18 @@
                   </div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">Tax</div>
+                  <div class="col-md-6 text-primary font-weight-bold">Tax</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 mb-2">
                     <input type="text" class="form-control" @change="onchangeTax" :value="tax" />
                   </div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">Expense Type</div>
+                  <div class="col-md-6 text-primary font-weight-bold">Expense Type</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 mb-2">
                     <select class="form-control" @change="onchangeCategory">
                       <option value="select" selected>Select</option>
                       <option
@@ -85,10 +85,10 @@
                   </div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">Notes</div>
+                  <div class="col-md-6 text-primary font-weight-bold">Notes</div>
                 </div>
                 <div id="row-header" class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 mb-2">
                     <textarea class="form-control" @change="onchangeNotes" :value="notes" />
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-function Transaction() {
+function Transaction () {
   id = '',
   transType = '',
   description = '',
@@ -11,4 +11,4 @@ function Transaction() {
   isOutOfPocket = false
 }
 
-module.exports = Transaction;
+module.exports = Transaction

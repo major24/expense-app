@@ -5,10 +5,8 @@ export default {
   authenticateUser: async function (userId, password) {
     try {
       const url = config.api.postAuthenticateUser.url
-      console.log('>>>Authentication url: ', url)
       const data = { 'UserId': userId, 'Password': password }
       const resp = await ajax.post(url, data)
-      console.log('>>>User authentication passed. ', resp)
       if (resp.status === 200) {
         return true
       }

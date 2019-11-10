@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <form class="form-signin">
-      <p>{{this.userDetails}}</p>
       <h2 class="form-signin-heading">Login</h2>
       <input
         type="text"
@@ -34,7 +33,6 @@
 
 <script>
 import loginService from '../services/loginService'
-// import loginService from '../services/mocks/mockLoginService'
 import router from '../router'
 import { mapState } from 'vuex'
 
@@ -47,9 +45,6 @@ export default {
       authenticationError: ''
     }
   },
-  // mounted: function () {
-  //   const user = sessionStorage.getItem('userId')
-  // },
   computed: {
     ...mapState({
       userDetails: state => state.commonDetails
@@ -72,7 +67,6 @@ export default {
       console.log('>>>isAuthenticated: ', isAuthenticated)
       if (isAuthenticated) {
         const user = await loginService.getUser(this.userId)
-        // console.log('>>>Fetched user: ', user)
         // Save to session storage
         loginService.setUserInSessionStorage(user.userId)
         this.$store.commit('commonDetails/setAuthenticationSuccess')

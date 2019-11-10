@@ -1,30 +1,31 @@
 <template>
   <div class="main-content">
-
-      <div id="action-buttons-footer" class="container-fluid">
-        <div class="row">
-          <div class="col-md-4 text-left">
-            <span>Approvar Id</span>
+        <div id="grid" class="container-fluid">
+      <div class="row">
+        <div class="col-md-2 text-primary font-weight-bold">Approver ID</div>
+        <div class="col-md-4 text-info font-weight-bold">
             <input
               type="text"
+              class="form-control"
               id="approverId"
               @change="onchangeApproverId"
               :value="userDetails.managerId"
             />
-          </div>
-          <div class="col-md-4 text-left">
-            Cost Centre
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 text-primary font-weight-bold">Cost Centre</div>
+        <div class="col-md-4 text-info font-weight-bold">
             <input
               type="text"
+              class="form-control"
               id="costCentre"
               @change="onchangeCostCentre"
               :value="userDetails.costCentre"
             />
-          </div>
-
         </div>
       </div>
-
+    </div>
   </div>
 </template>
 
@@ -50,11 +51,4 @@ export default {
 </script>
 
 <style scoped>
-.main-content {
-  margin-right: 8em;
-  margin-left: 8em;
-}
-#action-buttons-footer {
-  margin-top: 3em;
-}
 </style>

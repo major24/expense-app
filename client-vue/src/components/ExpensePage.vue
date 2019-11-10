@@ -7,17 +7,14 @@
       <UserInfo />
       <ExpenseGridView />
       <AddExpenseModalPage />
+      <p></p>
       <ApproverInfo />
 
-      <div id="action-buttons-footer" class="container-fluid">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 text-right">
-            <span class="action-buttons">
-              <button id="add-expense" type="button" class="btn btn-secondary">Cancel</button>
-            </span>
-            <span class="action-buttons">
-              <button id="add-expense" type="button" class="btn btn-success" @click="save">Submit</button>
-            </span>
+            <button id="add-expense" type="button" class="btn btn-secondary">Cancel</button>
+            <button id="add-expense" type="button" class="btn btn-success ml-1" @click="save">Submit</button>
           </div>
         </div>
       </div>
@@ -84,30 +81,7 @@ export default {
 
 <style scoped>
 .main-content {
-  margin-right: 8em;
-  margin-left: 8em;
-}
-#row-header {
-  background-color: #34b1eb;
-}
-#grid > .row > div {
-  border-bottom: 0.5px solid grey;
-}
-#action-buttons-footer {
-  margin-top: 3em;
-}
-.action-buttons {
-  margin: 0.4em;
-}
-.field-label {
-  font-weight: bold;
-  font-size: 1em;
-  margin: 0.5em;
-}
-.field-value {
-  color: blue;
-  font-weight: bold;
-  font-size: 1em;
-  margin: 0.2em;
+  margin-right: 3em;
+  margin-left: 3em;
 }
 </style>
