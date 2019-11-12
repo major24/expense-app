@@ -13,7 +13,6 @@ export default {
     const resp = await ajax.get(url)
     return resp
   },
-
   save: async (transactions, user) => {
     // Create an expense obj to be passed to api service..
     const expns = transactions.map((t) => {
@@ -49,9 +48,13 @@ export default {
       return error
     }
   },
-
   getByUserId: async (options) => {
     let url = `${config.api.getGithubusers.url}/${options.userId}`
+    const resp = await ajax.get(url)
+    return resp
+  },
+  getCostCentreApprovals: async () => {
+    let url = config.api.getCostCentreApprovals.url
     const resp = await ajax.get(url)
     return resp
   }

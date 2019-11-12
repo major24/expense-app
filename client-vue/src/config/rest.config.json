@@ -15,6 +15,9 @@
     "getTransactions": {
       "url": "/api/transactions"
     },
+    "getCostCentreApprovals": {
+      "url": "/api/costcentres/users/approvals"
+    },
     "getGithubusers": {
       "url": "https://api.github.com/users"
     }

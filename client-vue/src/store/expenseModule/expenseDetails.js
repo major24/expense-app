@@ -6,7 +6,11 @@ export default {
   namespaced: true,
   state: {
     transactions: [],
-    user: {},
+    user: {
+      userId: '',
+      approverId: '',
+      costCentre: ''
+    },
     expense: {
       isShowExpenses: true,
       submissionMessage: ''
@@ -15,14 +19,16 @@ export default {
       userId: '',
       approverId: '',
       costCentre: ''
-    }
+    },
+    costCentreApprovals: [],
+    approvals: []
   },
   actions: {
     async loadData ({ commit, state }, userId) {
       if (state.transactions.length === 0) {
         const data = await transactionService.getTransactionsByUserId(userId)
         if (data && data.status === 200) {
-          console.log('Data sussessfully fetched: ', data)
+          console.log('Transactions sussessfully fetched: ', data)
           commit('setTransactionData', data.data)
         } else {
           console.log('Error in fetching transaction data:')
@@ -36,6 +42,22 @@ export default {
         commit('setSubmissionMessage', resp.data)
       } else {
         commit('setSubmissionMessage', resp.data)
+      }
+    },
+    async loadCostCentreApprovalData ({ commit, state }) {
+      if (state.costCentreApprovals.length === 0) {
+        const data = await transactionService.getCostCentreApprovals()
+        if (data && data.status === 200) {
+          console.log('Costcetra approvals data sussessfully fetched: ', data)
+          commit('setCostCentreApprovals', data.data)
+          let list = []
+          data.data.map((x) => {
+            x.approvals.map(y => list.push(y))
+          })
+          commit('setCostCentreApprovers', list)
+        } else {
+          console.log('Error in fetching cost centre approvals data:')
+        }
       }
     }
   },
@@ -94,9 +116,13 @@ export default {
     },
     setApproverId (state, approverId) {
       state.user.approverId = approverId
+      // this.state.user = { ...state.user, approverId: approverId }
     },
     setHideExpenses (state) {
       state.expense.isShowExpenses = false
+    },
+    setShowExpenses (state) {
+      state.expense.isShowExpenses = true
     },
     setSubmissionMessage (state, msg) {
       state.expense.submissionMessage = msg
@@ -109,6 +135,12 @@ export default {
     },
     setUser (state, user) {
       state.user = user
+    },
+    setCostCentreApprovals (state, ccApprovals) {
+      state.costCentreApprovals = ccApprovals
+    },
+    setCostCentreApprovers (state, approvers) {
+      state.approvals = approvers
     }
   }
 }

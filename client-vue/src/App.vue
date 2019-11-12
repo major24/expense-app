@@ -17,8 +17,8 @@ import router from './router'
 export default {
   name: 'App',
   mounted: function () {
-    let user = sessionStorage.getItem('user')
-    if (user) {
+    let userId = sessionStorage.getItem('userId')
+    if (userId) {
       this.$store.commit('commonDetails/setAuthenticationSuccess')
     } else {
       this.$store.commit('commonDetails/setAuthenticationFail')

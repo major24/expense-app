@@ -32,6 +32,7 @@ import AddExpenseModalPage from '@/components/AddExpenseModalPage'
 import UserInfo from '@/components/UserInfo'
 import ApproverInfo from '@/components/ApproverInfo'
 import { mapState } from 'vuex'
+import loginService from '../services/loginService'
 
 export default {
   name: 'expense',
@@ -46,12 +47,20 @@ export default {
       loggedIn: false
     }
   },
-  created: function () {
+  created: async function () {
     let userId = sessionStorage.getItem('userId')
     console.log('>>>From Session: logged in user:', userId)
     // user =  { userId: "user1" }; // TMP to work when api is not available
-    if (userId && this.expenseDetails.user) {
+    if (userId) {
+      console.log('>>>>expuser:', this.expenseDetails.user)
+      // Upon refresh, reload user info
+      if (this.expenseDetails.user.userId === '') {
+        const user = await loginService.getUser(userId)
+        this.$store.commit('expenseDetails/setUser', user)
+        this.$store.commit('expenseDetails/setApproverId', user.managerId)
+      }
       this.loadData(userId)
+      this.loadCostCentreApprovalData()
       this.loggedIn = true
     } else {
       this.loggedIn = false
@@ -68,17 +77,23 @@ export default {
     loadData (userId) {
       this.$store.dispatch('expenseDetails/loadData', userId)
     },
+    loadCostCentreApprovalData () {
+      this.$store.dispatch('expenseDetails/loadCostCentreApprovalData')
+    },
+    showExpenses () {
+      this.$store.commit('/expenseDetails/setShowExpenses')
+    },
     save () {
       let foundError = false
       if (!this.expenseDetails.user.userId) {
-        alert ('User Id missing. Please refresh and login again')
+        alert('User Id missing. Please refresh and login again')
       }
       if (!this.expenseDetails.user.approverId) {
         const payload = {
           errorId: 'approverId',
           errorDesc: 'Approver id is required'
         }
-        this.$store.commit('expenseDetails/setError', payload)
+        this.$store.commit('expeneDetails/setError', payload)
         foundError = true
       }
       if (!this.expenseDetails.user.costCentre) {

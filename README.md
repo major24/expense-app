@@ -1,27 +1,28 @@
 
-# AspDotNetCoreMvc-VueJS-Expense Submission App 
-AspCore MVC server app acts as server for VueJS client. Client is built with Vuejs, vuex and bootstrap template.  
-Once the client is built (npm run build), it saves assests (js files) to wwwroot of the 'server-mvc' app.  
-When running server app, the app renders the VueJS app.  
+# AspDotNetCoreMvc + Vue.js - Expense Submission App
+## Built with:
+  AspNetCoreMvc for backend
+  Vue.js and VUEX for store management
+  Bootstrap
 
 ## How to run
+## Requires REST Api to fetch data from Sql Server. Run Expense Api REST api in the background
+  (NOT PART OF THIS PKG)
 
-## First run the REST api in the background  
-  (creditcard-transactions app - This requires SQL server setup. Data is fetched from db) 
-  Build and publish 
-  Run api: run using 'dotnet ./transactions.dll' in the command line (from published folder)
-  Should be able to access https://localhost:5001/api/...
-  
-## Open Vue JS client and build
-  $ npm run build  
-  This should build and deploy under server-mvc/wwwroot/dist folder  
- 
-## In Visual Studio, Open server-mvc project and run  
-  Debug or dotnet run  
-  This should run the web app. Home page should render what the vue page contains...  
-  Vue page has two buttons to get REST api data. upon clicking should return api data  
+## To run in development mode...
+  Open Expense API app using visual studio 2019 and run in IIS mode
+  Open Server-Mvc app using visual studio 2019 and run IIS mode
+  It should display the app. Vuejs code is already complied and saved to wwwroot folder in server-mvc
 
+## How to debug and edit the app
+  Open client-vue in visual studio CODE. make changes
 
-## expense-app  
-   AspCoreMVC server and VUEJS client app to submit credit card and OOP expenses  
+  Open terminal and navigate to root folder
+  $ ~/Documents/projects/dotnet-core/expense-app
+  $ npm run build:client    (This will build the vuejs app and save pkg under server-mvc/wwwroot folder)
 
+## Hot to run in production mode
+  Set the REST API endpoint in config. If may run from :5001 or Azure site
+  Build the api app and run the api using $ dotnet run command form published folder
+  $ dotnet ./expense-api.dll
+  Should be able to access https://localhost:5001/api/.....
