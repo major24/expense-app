@@ -10,9 +10,9 @@
   (NOT PART OF THIS PKG)
 
 ## To run in development mode...
-  Open Expense API app using visual studio 2019 and run in IIS mode
-  Open Server-Mvc app using visual studio 2019 and run IIS mode
-  It should display the app. Vuejs code is already complied and saved to wwwroot folder in server-mvc
+  * Open Expense API app using visual studio 2019 and run in IIS mode
+  * Open Server-Mvc app using visual studio 2019 and run IIS mode
+  * It should display the app. Vuejs code is already complied and saved to wwwroot folder in server-mvc
 
 ## How to debug and edit the app
   Open client-vue in visual studio CODE. make changes
