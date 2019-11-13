@@ -1,9 +1,9 @@
 <template>
   <div class="main-content">
-    <div v-if="!loggedIn">
+    <div v-if="!expenseDetails.user.userId">
       <b>Please login before accessing the form!</b>
     </div>
-    <div v-if="loggedIn && expenseDetails.expense.isShowExpenses" id="expense-content">
+    <div v-if="expenseDetails.user.userId && expenseDetails.expense.isShowExpenses" id="expense-content">
       <UserInfo />
       <ExpenseGridView />
       <AddExpenseModalPage />
@@ -44,7 +44,6 @@ export default {
   },
   data: function () {
     return {
-      loggedIn: false
     }
   },
   created: async function () {
@@ -52,7 +51,6 @@ export default {
     console.log('>>>From Session: logged in user:', userId)
     // user =  { userId: "user1" }; // TMP to work when api is not available
     if (userId) {
-      console.log('>>>>expuser:', this.expenseDetails.user)
       // Upon refresh, reload user info
       if (this.expenseDetails.user.userId === '') {
         const user = await loginService.getUser(userId)
@@ -61,9 +59,6 @@ export default {
       }
       this.loadData(userId)
       this.loadCostCentreApprovalData()
-      this.loggedIn = true
-    } else {
-      this.loggedIn = false
     }
   },
   computed: {

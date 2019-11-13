@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'login',
+  name: 'home',
   components: {}
 }
 </script>

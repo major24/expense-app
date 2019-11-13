@@ -99,6 +99,7 @@ export default {
       })
     },
     setIsRemove (state, payload) {
+      console.log('>>>>>>>>>>>>>>>????', payload)
       state.transactions.forEach((tran, idx) => {
         if (tran.id === payload.id) {
           state.transactions.splice(idx, 1)

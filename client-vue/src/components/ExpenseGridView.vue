@@ -45,12 +45,12 @@ export default {
       const payload = { id: id, status: e.target.checked }
       this.$store.commit('expenseDetails/setIsPersonal', payload)
     },
-    onchangeIsRemove (e, id) {
-      const payload = { id: id, status: e.target.checked }
-      this.$store.commit('expenseDetails/setIsRemove', payload)
-    },
+    // onchangeIsRemove (e, id) {
+    //   const payload = { id: id, status: e.target.checked }
+    //   this.$store.commit('expenseDetails/setIsRemove', payload)
+    // },
     remove (e, id) {
-      const payload = { id: id, status: e.target.checked }
+      const payload = { id: id }
       this.$store.commit('expenseDetails/setIsRemove', payload)
     }
   }
