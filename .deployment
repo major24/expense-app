@@ -1,3 +1,2 @@
 [config]
 project = server-mvc/server-mvc/server-mvc.csproj
-command = deploy.cmd
