@@ -107,8 +107,8 @@ export default {
 </script>
 
 <style scoped>
-.main-content {
+/* .main-content {
   margin-right: 3em;
   margin-left: 3em;
-}
+} */
 </style>
